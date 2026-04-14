@@ -69,7 +69,8 @@
                             </h6>
                         </div>
                         <div class="card-body p-4">
-                            <form action="{{ route('siswa.aspirasi.store') }}" method="POST" id="formPengaduan">
+                                        <form action="{{ route('siswa.aspirasi.store') }}" method="POST" 
+                id="formPengaduan" enctype="multipart/form-data">
                                 @csrf
                                 
                                 <!-- Info Siswa (Read Only) -->
@@ -135,7 +136,7 @@
                                                    class="form-control form-control-modern @error('lokasi') is-invalid @enderror" 
                                                    id="lokasi" 
                                                    name="lokasi" 
-                                                   placeholder="Contoh: Ruang Kelas XII PPLG 1" 
+                                                   placeholder="" 
                                                    value="{{ old('lokasi') }}">
                                             @error('lokasi')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -159,7 +160,7 @@
                                                    class="form-control form-control-modern @error('judul_pengaduan') is-invalid @enderror" 
                                                    id="judul_pengaduan" 
                                                    name="judul_pengaduan" 
-                                                   placeholder="Contoh: AC di ruang kelas tidak dingin" 
+                                                   placeholder="" 
                                                    value="{{ old('judul_pengaduan') }}"
                                                    required
                                                    maxlength="255">
@@ -167,7 +168,7 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                             <small class="form-text text-muted">
-                                                <i class="bi bi-lightbulb"></i> Buat judul yang singkat dan jelas
+                                                <i class="bi bi-lightbulb"></i> Buat judul (singkat dan jelas)
                                             </small>
                                         </div>
                                     </div>
@@ -185,7 +186,7 @@
                                                       id="deskripsi_pengaduan" 
                                                       name="deskripsi_pengaduan" 
                                                       rows="6" 
-                                                      placeholder="Jelaskan detail pengaduan Anda secara lengkap..."
+                                                      placeholder="Jelaskan detail pengaduan Anda secara lengkap."
                                                       required>{{ old('deskripsi_pengaduan') }}</textarea>
                                             @error('deskripsi_pengaduan')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -198,6 +199,33 @@
                                 </div>
 
                                 <hr class="mb-4">
+
+                                <!-- Upload Foto -->
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="form-group-modern">
+            <label class="form-label-modern" for="foto">
+                <i class="bi bi-image-fill text-info"></i> Foto Pendukung
+            </label>
+            <input type="file" 
+                   class="form-control form-control-modern @error('foto') is-invalid @enderror" 
+                   id="foto" 
+                   name="foto"
+                   accept="image/jpg,image/jpeg,image/png">
+            @error('foto')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+            <small class="form-text text-muted">
+                <i class="bi bi-lightbulb"></i> Opsional.
+            </small>
+            <!-- Preview foto -->
+            <div id="fotoPreview" class="mt-2 d-none">
+                <img id="previewImg" src="#" alt="Preview" 
+                     class="img-thumbnail" style="max-height: 200px;">
+            </div>
+        </div>
+    </div>
+</div>
 
                                 <!-- Buttons -->
                                 <div class="row">
@@ -216,26 +244,7 @@
                         </div>
                     </div>
 
-                    <!-- Tips Card -->
-                    <div class="card border-0 shadow-sm mt-4">
-                        <div class="card-body">
-                            <h6 class="fw-bold mb-3">
-                                <i class="bi bi-lightbulb-fill text-warning"></i> Tips Membuat Pengaduan yang Baik:
-                            </h6>
-                            <ul class="mb-0">
-                                <li class="mb-2">Pilih kategori yang sesuai dengan pengaduan Anda</li>
-                                <li class="mb-2">Buat judul yang singkat, jelas, dan mudah dipahami</li>
-                                <li class="mb-2">Jelaskan masalah dengan detail dan spesifik</li>
-                                <li class="mb-2">Sebutkan lokasi kejadian dengan jelas</li>
-                                <li class="mb-0">Gunakan bahasa yang sopan dan mudah dipahami</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                   
 
 @push('styles')
 <style>
@@ -337,6 +346,20 @@
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
     });
+
+    // Preview foto sebelum upload
+document.getElementById('foto').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('previewImg').src = e.target.result;
+            document.getElementById('fotoPreview').classList.remove('d-none');
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
 </script>
 @endpush
 @endsection

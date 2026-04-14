@@ -26,9 +26,7 @@
             <a class="nav-link" href="{{ route('admin.kategori.index') }}">
                 <i class="bi bi-tags"></i> Kelola Kategori
             </a>
-            <a class="nav-link" href="{{ route('admin.laporan.index') }}">
-                <i class="bi bi-file-earmark-text"></i> Laporan
-            </a>
+            
         </nav>
         
         <hr class="bg-white opacity-25 mt-4">

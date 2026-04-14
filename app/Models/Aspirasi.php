@@ -17,6 +17,7 @@ class Aspirasi extends Model
         'judul_pengaduan',
         'deskripsi_pengaduan',
         'lokasi',
+        'foto',
         'status',
         'tanggal_pengaduan',
     ];

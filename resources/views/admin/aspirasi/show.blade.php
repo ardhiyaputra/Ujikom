@@ -26,9 +26,7 @@
             <a class="nav-link" href="{{ route('admin.kategori.index') }}">
                 <i class="bi bi-tags"></i> Kelola Kategori
             </a>
-            <a class="nav-link" href="{{ route('admin.laporan.index') }}">
-                <i class="bi bi-file-earmark-text"></i> Laporan
-            </a>
+           
         </nav>
         
         <hr class="bg-white opacity-25 mt-4">
@@ -121,6 +119,22 @@
                                 <label class="text-muted small">Deskripsi Pengaduan</label>
                                 <p class="text-justify" style="white-space: pre-line;">{{ $aspirasi->deskripsi_pengaduan }}</p>
                             </div>
+                            @if($aspirasi->foto)
+<hr>
+<div>
+    <label class="text-muted small">Foto Pendukung</label>
+    <div class="mt-2">
+        <img src="{{ asset('storage/' . $aspirasi->foto) }}" 
+             alt="Foto Pengaduan" 
+             class="img-fluid rounded shadow-sm" 
+             style="max-height: 350px; cursor: pointer;"
+             onclick="window.open(this.src, '_blank')">
+        <small class="d-block text-muted mt-1">
+            <i class="bi bi-zoom-in"></i> Klik foto untuk memperbesar
+        </small>
+    </div>
+</div>
+@endif
                         </div>
                     </div>
 
