@@ -205,7 +205,7 @@
     <div class="col-md-12">
         <div class="form-group-modern">
             <label class="form-label-modern" for="foto">
-                <i class="bi bi-image-fill text-info"></i> Foto Pendukung
+                <i class="bi bi-image-fill text-info"></i> Foto 
             </label>
             <input type="file" 
                    class="form-control form-control-modern @error('foto') is-invalid @enderror" 
